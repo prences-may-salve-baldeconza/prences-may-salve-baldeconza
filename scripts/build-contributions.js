@@ -1,6 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 
+/*
+ * =========================================================
+ * FILES
+ * =========================================================
+ */
+
 const dataPath = path.join(
   __dirname,
   "..",
@@ -21,21 +27,28 @@ const data = JSON.parse(
 
 const contributions = data.contributions;
 
+
 /*
- * ---------------------------------------------------------
- * CONFIGURATION
- * ---------------------------------------------------------
+ * =========================================================
+ * CANVAS
+ * =========================================================
  */
 
 const WIDTH = 1584;
-const HEIGHT = 520;
+const HEIGHT = 396;
 
-const LEFT = 90;
-const TOP = 100;
 
-const CELL = 14;
+/*
+ * =========================================================
+ * GITHUB-STYLE GRID
+ * =========================================================
+ */
+
+const LEFT = 150;
+const TOP = 116;
+
+const CELL = 12;
 const GAP = 4;
-
 const STEP = CELL + GAP;
 
 const ROWS = 7;
@@ -47,24 +60,35 @@ const GRID_WIDTH =
 const GRID_HEIGHT =
   ROWS * STEP - GAP;
 
+
 /*
- * GitHub-style contribution levels.
+ * =========================================================
+ * COLORS
  *
- * Mostly monochrome, with restrained red accents.
+ * Level 0 = almost white
+ * Level 1 = light gray
+ * Level 2 = medium gray
+ * Level 3 = dark charcoal
+ * Level 4 = restrained red
+ *
+ * MORE CONTRIBUTIONS = DARKER
+ * Level 4 = RED SIGNAL
+ * =========================================================
  */
 
 const LEVELS = [
-  "#161616",
-  "#343434",
-  "#666666",
-  "#A6A6A6",
-  "#E63946"
+  "#F0F0F0",
+  "#D2D2D2",
+  "#929292",
+  "#3F3F3F",
+  "#C62828"
 ];
 
+
 /*
- * ---------------------------------------------------------
- * BUILD DATE MAP
- * ---------------------------------------------------------
+ * =========================================================
+ * CONTRIBUTION MAP
+ * =========================================================
  */
 
 const contributionMap = new Map();
@@ -76,22 +100,49 @@ for (const item of contributions) {
   );
 }
 
+
 /*
- * ---------------------------------------------------------
+ * =========================================================
  * DATE HELPERS
- * ---------------------------------------------------------
+ * =========================================================
  */
 
 function parseDate(dateString) {
+
   const [year, month, day] =
     dateString.split("-").map(Number);
 
   return new Date(
-    Date.UTC(year, month - 1, day)
+    Date.UTC(
+      year,
+      month - 1,
+      day
+    )
   );
 }
 
-function formatMonth(date) {
+
+function dateKey(date) {
+
+  const year =
+    date.getUTCFullYear();
+
+  const month =
+    String(
+      date.getUTCMonth() + 1
+    ).padStart(2, "0");
+
+  const day =
+    String(
+      date.getUTCDate()
+    ).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+
+function monthName(date) {
+
   return date.toLocaleString(
     "en-US",
     {
@@ -101,27 +152,44 @@ function formatMonth(date) {
   );
 }
 
+
 /*
- * ---------------------------------------------------------
- * DETERMINE FIRST SUNDAY
- * ---------------------------------------------------------
+ * =========================================================
+ * DATE RANGE
+ * =========================================================
  */
 
 const firstDate =
   parseDate(contributions[0].date);
 
-const firstSunday =
-  new Date(firstDate);
+const lastDate =
+  parseDate(
+    contributions[
+      contributions.length - 1
+    ].date
+  );
 
-firstSunday.setUTCDate(
-  firstSunday.getUTCDate() -
-  firstSunday.getUTCDay()
-);
 
 /*
- * ---------------------------------------------------------
- * SVG
- * ---------------------------------------------------------
+ * Move backward to Sunday.
+ *
+ * GitHub's contribution calendar is organized
+ * vertically by weekday and horizontally by week.
+ */
+
+const calendarStart =
+  new Date(firstDate);
+
+calendarStart.setUTCDate(
+  calendarStart.getUTCDate() -
+  calendarStart.getUTCDay()
+);
+
+
+/*
+ * =========================================================
+ * SVG START
+ * =========================================================
  */
 
 let svg = `
@@ -143,24 +211,22 @@ let svg = `
           Arial,
           sans-serif;
 
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
-        letter-spacing: 0.4px;
 
         fill: #111111;
       }
 
-      .subtitle {
+      .count {
         font-family:
           "Space Grotesk",
           "Segoe UI",
           Arial,
           sans-serif;
 
-        font-size: 12px;
-        letter-spacing: 0.8px;
+        font-size: 13px;
 
-        fill: #777777;
+        fill: #666666;
       }
 
       .month {
@@ -171,7 +237,8 @@ let svg = `
           sans-serif;
 
         font-size: 11px;
-        fill: #777777;
+
+        fill: #666666;
       }
 
       .weekday {
@@ -182,116 +249,193 @@ let svg = `
           sans-serif;
 
         font-size: 10px;
-        fill: #888888;
+
+        fill: #777777;
+      }
+
+      .year {
+        font-family:
+          "Space Grotesk",
+          "Segoe UI",
+          Arial,
+          sans-serif;
+
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .legend {
+        font-family:
+          "Space Grotesk",
+          "Segoe UI",
+          Arial,
+          sans-serif;
+
+        font-size: 10px;
+
+        fill: #777777;
       }
 
       .cell {
-        shape-rendering: geometricPrecision;
+        shape-rendering:
+          geometricPrecision;
       }
 
     </style>
 
   </defs>
 
-  <!-- Background -->
+
+  <!-- =====================================================
+       BACKGROUND
+  ====================================================== -->
+
   <rect
-    x="0"
-    y="0"
     width="${WIDTH}"
     height="${HEIGHT}"
     fill="#FFFFFF"
   />
 
-  <!-- Header -->
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
   <text
     x="${LEFT}"
-    y="45"
+    y="38"
     class="title"
   >
-    GitHub Contributions
+    Contributions
+  </text>
+
+
+  <text
+    x="${LEFT + 165}"
+    y="38"
+    class="count"
+  >
+    ${contributions.length} contributions in the last year
+  </text>
+
+
+  <!-- =====================================================
+       YEAR SELECTOR
+  ====================================================== -->
+
+  <g transform="translate(${WIDTH - 270}, 18)">
+
+    <!-- 2025 -->
+
+    <rect
+      x="0"
+      y="0"
+      width="72"
+      height="30"
+      rx="6"
+      fill="#F3F3F3"
+      stroke="#D8D8D8"
+    />
+
+    <text
+      x="36"
+      y="19"
+      text-anchor="middle"
+      class="year"
+      fill="#666666"
+    >
+      2025
+    </text>
+
+
+    <!-- 2026 ACTIVE -->
+
+    <rect
+      x="78"
+      y="0"
+      width="72"
+      height="30"
+      rx="6"
+      fill="#111111"
+    />
+
+    <text
+      x="114"
+      y="19"
+      text-anchor="middle"
+      class="year"
+      fill="#FFFFFF"
+    >
+      2026
+    </text>
+
+  </g>
+
+
+  <!-- =====================================================
+       WEEKDAY LABELS
+  ====================================================== -->
+
+  <text
+    x="${LEFT - 42}"
+    y="${TOP + STEP + 9}"
+    class="weekday"
+  >
+    Mon
   </text>
 
   <text
-    x="${LEFT}"
-    y="68"
-    class="subtitle"
+    x="${LEFT - 42}"
+    y="${TOP + STEP * 3 + 9}"
+    class="weekday"
   >
-    ${data.username.toUpperCase()} · LAST 365 DAYS
+    Wed
   </text>
 
+  <text
+    x="${LEFT - 42}"
+    y="${TOP + STEP * 5 + 9}"
+    class="weekday"
+  >
+    Fri
+  </text>
 `;
 
-/*
- * ---------------------------------------------------------
- * WEEKDAY LABELS
- * ---------------------------------------------------------
- */
-
-const weekdayLabels = [
-  "Sun",
-  "Mon",
-  "Tue",
-  "Wed",
-  "Thu",
-  "Fri",
-  "Sat"
-];
-
-for (let row = 0; row < ROWS; row++) {
-
-  /*
-   * Only show every other weekday label,
-   * similar to GitHub's compact presentation.
-   */
-
-  if (
-    row === 1 ||
-    row === 3 ||
-    row === 5
-  ) {
-
-    svg += `
-      <text
-        x="${LEFT - 38}"
-        y="${TOP + row * STEP + 11}"
-        class="weekday"
-      >
-        ${weekdayLabels[row]}
-      </text>
-    `;
-  }
-}
 
 /*
- * ---------------------------------------------------------
+ * =========================================================
  * MONTH LABELS
- * ---------------------------------------------------------
+ *
+ * Only show a month when a new month begins inside
+ * a new calendar column.
+ * =========================================================
  */
 
 let previousMonth = "";
 
-for (let week = 0; week < WEEKS; week++) {
+for (
+  let week = 0;
+  week < WEEKS;
+  week++
+) {
 
-  const date = new Date(firstSunday);
+  const weekDate =
+    new Date(calendarStart);
 
-  date.setUTCDate(
-    date.getUTCDate() + week * 7
+  weekDate.setUTCDate(
+    weekDate.getUTCDate() +
+    week * 7
   );
 
   const month =
-    formatMonth(date);
-
-  /*
-   * Only draw a label when the month changes.
-   */
+    monthName(weekDate);
 
   if (month !== previousMonth) {
 
     svg += `
       <text
         x="${LEFT + week * STEP}"
-        y="${TOP - 18}"
+        y="${TOP - 16}"
         class="month"
       >
         ${month}
@@ -302,17 +446,27 @@ for (let week = 0; week < WEEKS; week++) {
   }
 }
 
+
 /*
- * ---------------------------------------------------------
- * CONTRIBUTION CELLS
- * ---------------------------------------------------------
+ * =========================================================
+ * CONTRIBUTION GRID
+ * =========================================================
  */
 
-for (let week = 0; week < WEEKS; week++) {
+for (
+  let week = 0;
+  week < WEEKS;
+  week++
+) {
 
-  for (let row = 0; row < ROWS; row++) {
+  for (
+    let row = 0;
+    row < ROWS;
+    row++
+  ) {
 
-    const date = new Date(firstSunday);
+    const date =
+      new Date(calendarStart);
 
     date.setUTCDate(
       date.getUTCDate() +
@@ -320,36 +474,51 @@ for (let week = 0; week < WEEKS; week++) {
       row
     );
 
-    const year =
-      date.getUTCFullYear();
-
-    const month =
-      String(
-        date.getUTCMonth() + 1
-      ).padStart(2, "0");
-
-    const day =
-      String(
-        date.getUTCDate()
-      ).padStart(2, "0");
-
-    const dateString =
-      `${year}-${month}-${day}`;
+    const key =
+      dateKey(date);
 
     /*
-     * Ignore cells outside our 365-day dataset.
+     * Only render dates that actually belong
+     * to our 365-day dataset.
      */
 
+    const exists =
+      contributionMap.has(key);
+
     const level =
-      contributionMap.has(dateString)
-        ? contributionMap.get(dateString)
+      exists
+        ? contributionMap.get(key)
         : 0;
 
     const x =
-      LEFT + week * STEP;
+      LEFT +
+      week * STEP;
 
     const y =
-      TOP + row * STEP;
+      TOP +
+      row * STEP;
+
+    /*
+     * Dates outside the real dataset remain invisible.
+     */
+
+    if (!exists) {
+
+      svg += `
+        <rect
+          class="cell"
+          x="${x}"
+          y="${y}"
+          width="${CELL}"
+          height="${CELL}"
+          rx="2"
+          fill="transparent"
+        />
+      `;
+
+      continue;
+    }
+
 
     svg += `
       <rect
@@ -358,90 +527,115 @@ for (let week = 0; week < WEEKS; week++) {
         y="${y}"
         width="${CELL}"
         height="${CELL}"
-        rx="3"
+        rx="2"
         fill="${LEVELS[level]}"
       >
         <title>
-          ${dateString}: contribution level ${level}
+          ${key} — contribution level ${level}
         </title>
       </rect>
     `;
   }
 }
 
+
 /*
- * ---------------------------------------------------------
+ * =========================================================
  * LEGEND
- * ---------------------------------------------------------
+ * =========================================================
  */
 
 const legendY =
-  TOP + GRID_HEIGHT + 38;
+  TOP + GRID_HEIGHT + 32;
+
+const legendX =
+  WIDTH - 300;
+
 
 svg += `
+
   <text
-    x="${LEFT}"
+    x="${legendX}"
     y="${legendY}"
-    class="subtitle"
+    class="legend"
   >
-    LESS
+    Less
   </text>
+
 `;
 
-for (let level = 0; level <= 4; level++) {
+
+for (
+  let level = 0;
+  level <= 4;
+  level++
+) {
 
   const x =
-    LEFT +
-    42 +
-    level * 21;
+    legendX +
+    34 +
+    level * 20;
 
   svg += `
     <rect
       x="${x}"
       y="${legendY - 10}"
-      width="14"
-      height="14"
-      rx="3"
+      width="${CELL}"
+      height="${CELL}"
+      rx="2"
       fill="${LEVELS[level]}"
     />
   `;
 }
 
+
 svg += `
+
   <text
-    x="${LEFT + 42 + 5 * 21 + 5}"
+    x="${legendX + 34 + 5 * 20}"
     y="${legendY}"
-    class="subtitle"
+    class="legend"
   >
-    MORE
+    More
   </text>
+
 `;
 
+
 /*
- * ---------------------------------------------------------
- * FOOTER
- * ---------------------------------------------------------
+ * =========================================================
+ * FOOTER LABEL
+ * =========================================================
  */
 
 svg += `
+
   <text
-    x="${WIDTH - 90}"
+    x="${LEFT}"
     y="${legendY}"
-    text-anchor="end"
-    class="subtitle"
+    class="legend"
   >
-    ${contributions.length} DAYS
+    ${data.username}
   </text>
+
 `;
+
+
+/*
+ * =========================================================
+ * END SVG
+ * =========================================================
+ */
 
 svg += `
 </svg>
 `;
 
+
 /*
- * ---------------------------------------------------------
- * SAVE
- * ---------------------------------------------------------
+ * =========================================================
+ * WRITE FILE
+ * =========================================================
  */
 
 fs.writeFileSync(
