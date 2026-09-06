@@ -1,4 +1,6 @@
-<img width="1584" height="396" alt="Pink Minimalist Personal LinkedIn Banner (2)" src="https://github.com/user-attachments/assets/b2f4c08c-86cc-4040-99ea-eee64388176d" />
+<img width="1584" height="396" alt="Profile Banner (6)" src="https://github.com/user-attachments/assets/404b9fb1-f367-4f35-8d62-a91706f95d60" />
+
+
 
 ## Hi there 👋
 
