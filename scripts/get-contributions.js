@@ -3,7 +3,9 @@ const fs = require("fs");
 const path = require("path");
 
 const username = "prences-may-salve-baldeconza";
-const url = `https://github.com/users/${username}/contributions`;
+
+const url =
+  `https://github.com/users/${username}/contributions`;
 
 https.get(
   url,
@@ -22,23 +24,26 @@ https.get(
 
     response.on("end", () => {
 
-      console.log(`GitHub response: HTTP ${response.statusCode}`);
-      console.log(`Downloaded HTML: ${html.length} characters`);
+      console.log(
+        `GitHub response: HTTP ${response.statusCode}`
+      );
+
+      console.log(
+        `Downloaded HTML: ${html.length} characters`
+      );
 
       if (response.statusCode !== 200) {
-        console.error("GitHub did not return the contribution page.");
+        console.error(
+          "GitHub did not return the contribution page."
+        );
         return;
       }
 
       /*
-       * GitHub contribution cells contain:
+       * Look at every HTML tag.
        *
-       * data-date="YYYY-MM-DD"
-       * data-level="0-4"
-       *
-       * We inspect EVERY HTML tag individually so that
-       * we don't accidentally capture only the first day
-       * of each week.
+       * We don't assume that contribution cells
+       * are <td> elements.
        */
 
       const tagRegex = /<[^>]+>/g;
@@ -50,6 +55,10 @@ https.get(
       while ((match = tagRegex.exec(html)) !== null) {
 
         const tag = match[0];
+
+        /*
+         * Only process tags containing both attributes.
+         */
 
         if (
           tag.includes("data-date=") &&
@@ -64,11 +73,25 @@ https.get(
 
           if (dateMatch && levelMatch) {
 
-            contributions.push({
-              date: dateMatch[1],
-              level: Number(levelMatch[1])
-            });
+            const date = dateMatch[1];
+            const level = Number(levelMatch[1]);
 
+            /*
+             * Validate the values before saving them.
+             */
+
+            if (
+              /^\d{4}-\d{2}-\d{2}$/.test(date) &&
+              level >= 0 &&
+              level <= 4
+            ) {
+
+              contributions.push({
+                date,
+                level
+              });
+
+            }
           }
         }
       }
@@ -90,49 +113,21 @@ https.get(
        * Sort chronologically.
        */
 
-      const cleaned = Array.from(
-        unique.values()
-      ).sort((a, b) =>
-        a.date.localeCompare(b.date)
-      );
+      const cleaned =
+        Array.from(unique.values()).sort(
+          (a, b) =>
+            a.date.localeCompare(b.date)
+        );
 
       console.log(
         `Found ${cleaned.length} unique contribution days.`
       );
 
       /*
-       * Safety check.
-       *
-       * A normal GitHub contribution calendar should
-       * contain roughly one year of daily cells.
+       * Check that we're actually getting daily data.
        */
 
-      if (cleaned.length < 300) {
-
-        console.error("");
-        console.error(
-          "ERROR: GitHub contribution data was not parsed correctly."
-        );
-
-        console.error(
-          "Only " +
-          cleaned.length +
-          " days were detected."
-        );
-
-        console.error("");
-        console.error(
-          "The SVG will NOT be generated yet."
-        );
-
-        return;
-      }
-
-      /*
-       * Check whether dates are actually daily.
-       */
-
-      let consecutivePairs = 0;
+      let consecutiveDays = 0;
 
       for (let i = 1; i < cleaned.length; i++) {
 
@@ -143,20 +138,58 @@ https.get(
           new Date(cleaned[i].date);
 
         const difference =
-          (current - previous) /
-          (1000 * 60 * 60 * 24);
+          Math.round(
+            (current - previous) /
+            (1000 * 60 * 60 * 24)
+          );
 
         if (difference === 1) {
-          consecutivePairs++;
+          consecutiveDays++;
         }
       }
 
       console.log(
-        `Consecutive daily pairs: ${consecutivePairs}`
+        `Consecutive daily pairs: ${consecutiveDays}`
       );
 
       /*
-       * Save the data.
+       * Safety check.
+       *
+       * If the parser is still broken, DON'T overwrite
+       * the existing JSON with bad data.
+       */
+
+      if (
+        cleaned.length < 300 ||
+        consecutiveDays < 200
+      ) {
+
+        console.error("");
+        console.error(
+          "ERROR: Contribution data does not look like daily data."
+        );
+
+        console.error(
+          "The JSON file was NOT updated."
+        );
+
+        console.error("");
+
+        if (cleaned.length > 0) {
+          console.error(
+            "First detected dates:"
+          );
+
+          console.error(
+            cleaned.slice(0, 15)
+          );
+        }
+
+        return;
+      }
+
+      /*
+       * Build final JSON.
        */
 
       const output = {
@@ -165,12 +198,13 @@ https.get(
         contributions: cleaned
       };
 
-      const outputPath = path.join(
-        __dirname,
-        "..",
-        "data",
-        "contributions.json"
-      );
+      const outputPath =
+        path.join(
+          __dirname,
+          "..",
+          "data",
+          "contributions.json"
+        );
 
       fs.writeFileSync(
         outputPath,
@@ -178,9 +212,12 @@ https.get(
       );
 
       console.log("");
-      console.log("SUCCESS");
       console.log(
-        `Saved ${cleaned.length} contribution days.`
+        "SUCCESS: Real daily contribution data retrieved."
+      );
+
+      console.log(
+        `Saved ${cleaned.length} days.`
       );
 
       console.log(
@@ -188,17 +225,17 @@ https.get(
       );
 
       console.log("");
-      console.log("First 10 days:");
+      console.log("First 15 days:");
 
       console.log(
-        cleaned.slice(0, 10)
+        cleaned.slice(0, 15)
       );
 
       console.log("");
-      console.log("Last 10 days:");
+      console.log("Last 5 days:");
 
       console.log(
-        cleaned.slice(-10)
+        cleaned.slice(-5)
       );
     });
 
@@ -209,8 +246,6 @@ https.get(
     "Unable to connect to GitHub:"
   );
 
-  console.error(
-    error.message
-  );
+  console.error(error.message);
 
 });
