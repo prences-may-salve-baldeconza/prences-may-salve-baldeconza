@@ -4,6 +4,14 @@
 
 ## Hi there 👋
 
+<h2 align="center">📊 My GitHub Contributions</h2>
+
+<p align="center">
+  <img src="./profile-3d-contrib/profile-green-animate.svg" 
+       alt="GitHub 3D Contribution Graph"
+       width="100%">
+</p>
+
 <!--
 **prences-may-salve-baldeconza/prences-may-salve-baldeconza** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
