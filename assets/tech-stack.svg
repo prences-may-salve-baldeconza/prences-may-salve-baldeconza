@@ -1,5 +1,6 @@
 <svg width="1584" height="720" viewBox="0 0 1584 720"
-     xmlns="http://www.w3.org/2000/svg">
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
 
   <defs>
 
@@ -60,336 +61,174 @@
 
   </defs>
 
-<!-- BACKGROUND -->
+  <rect width="1584" height="720" fill="#0d0d0d"/>
 
+  <ellipse cx="792" cy="365" rx="470" ry="300" fill="url(#centerGlow)"/>
 
-  <rect
-    width="1584"
-    height="720"
-    fill="#0d0d0d"/>
+  <text x="792" y="82" text-anchor="middle" fill="#ffffff" font-size="28" class="title">TECH STACK</text>
+  <text x="792" y="112" text-anchor="middle" fill="#888888" font-size="10" class="meta">LANGUAGES  /  FRAMEWORKS  /  TOOLS</text>
 
-  <ellipse
-    cx="792"
-    cy="365"
-    rx="470"
-    ry="300"
-    fill="url(#centerGlow)"/>
-
-<!-- header section -->
-
-  <text
-    x="792"
-    y="82"
-    text-anchor="middle"
-    fill="#ffffff"
-    font-size="28"
-    class="title">
-
-    TECH STACK
-
-  </text>
-
-
-  <text
-    x="792"
-    y="112"
-    text-anchor="middle"
-    fill="#888888"
-    font-size="10"
-    class="meta">
-
-    LANGUAGES  /  FRAMEWORKS  /  TOOLS
-
-  </text>
-
-  <line
-    x1="570"
-    y1="138"
-    x2="1014"
-    y2="138"
-    stroke="#333333"
-    stroke-width="1"/>
-
-
-  <line
-    x1="745"
-    y1="138"
-    x2="839"
-    y2="138"
-    stroke="#ffffff"
-    stroke-width="2">
-
-    <animate
-      attributeName="x1"
-      values="745;770;745"
-      dur="5s"
-      repeatCount="indefinite"/>
-
-    <animate
-      attributeName="x2"
-      values="839;814;839"
-      dur="5s"
-      repeatCount="indefinite"/>
-
+  <line x1="570" y1="138" x2="1014" y2="138" stroke="#333333" stroke-width="1"/>
+  <line x1="745" y1="138" x2="839" y2="138" stroke="#ffffff" stroke-width="2">
+    <animate attributeName="x1" values="745;770;745" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="839;814;839" dur="5s" repeatCount="indefinite"/>
   </line>
 
-
-  <!-- connection -->
-
-  <g
-    fill="none"
-    stroke="#333333"
-    stroke-width="1">
-
-    <!-- upper left -->
+  <g fill="none" stroke="#333333" stroke-width="1">
     <path d="M792 360 L560 225 L420 270"/>
-
-    <!-- upper right -->
     <path d="M792 360 L1024 225 L1164 270"/>
-
-    <!-- middle left -->
     <path d="M792 360 L470 390"/>
-
-    <!-- middle right -->
     <path d="M792 360 L1114 390"/>
-
-    <!-- lower left -->
     <path d="M792 360 L590 520 L450 565"/>
-
-    <!-- lower right -->
     <path d="M792 360 L994 520 L1134 565"/>
-
   </g>
 
-
-  <!-- secondary geometry -->
-
-  <g
-    fill="none"
-    stroke="#222222"
-    stroke-width="1">
-
+  <g fill="none" stroke="#222222" stroke-width="1">
     <path d="M420 270 L300 185"/>
     <path d="M1164 270 L1284 185"/>
     <path d="M450 565 L330 620"/>
     <path d="M1134 565 L1254 620"/>
-
   </g>
-
-
-<!-- connection pulse -->
 
   <g fill="#ffffff">
-
-    <circle r="2.5">
-      <animateMotion
-        path="M792 360 L560 225 L420 270"
-        dur="5s"
-        repeatCount="indefinite"/>
-    </circle>
-
-    <circle r="2.5">
-      <animateMotion
-        path="M792 360 L1024 225 L1164 270"
-        dur="5.8s"
-        repeatCount="indefinite"/>
-    </circle>
-
-    <circle r="2.5">
-      <animateMotion
-        path="M792 360 L470 390"
-        dur="4s"
-        repeatCount="indefinite"/>
-    </circle>
-
-    <circle r="2.5">
-      <animateMotion
-        path="M792 360 L1114 390"
-        dur="4.5s"
-        repeatCount="indefinite"/>
-    </circle>
-
-    <circle r="2.5">
-      <animateMotion
-        path="M792 360 L590 520 L450 565"
-        dur="6s"
-        repeatCount="indefinite"/>
-    </circle>
-
-    <circle r="2.5">
-      <animateMotion
-        path="M792 360 L994 520 L1134 565"
-        dur="6.4s"
-        repeatCount="indefinite"/>
-    </circle>
-
+    <circle r="2.5"><animateMotion path="M792 360 L560 225 L420 270" dur="5s" repeatCount="indefinite"/></circle>
+    <circle r="2.5"><animateMotion path="M792 360 L1024 225 L1164 270" dur="5.8s" repeatCount="indefinite"/></circle>
+    <circle r="2.5"><animateMotion path="M792 360 L470 390" dur="4s" repeatCount="indefinite"/></circle>
+    <circle r="2.5"><animateMotion path="M792 360 L1114 390" dur="4.5s" repeatCount="indefinite"/></circle>
+    <circle r="2.5"><animateMotion path="M792 360 L590 520 L450 565" dur="6s" repeatCount="indefinite"/></circle>
+    <circle r="2.5"><animateMotion path="M792 360 L994 520 L1134 565" dur="6.4s" repeatCount="indefinite"/></circle>
   </g>
 
-
- <!-- CENTER -->
-
-  <circle
-    cx="792"
-    cy="360"
-    r="76"
-    fill="#141414"
-    stroke="#ffffff"
-    stroke-width="1"/>
-
-  <circle
-    cx="792"
-    cy="360"
-    r="66"
-    fill="none"
-    stroke="#2e2e2e"
-    stroke-width="1"/>
-
-  <circle
-    cx="792"
-    cy="360"
-    r="7"
-    fill="#ffffff">
-
-    <animate
-      attributeName="r"
-      values="5;8;5"
-      dur="3s"
-      repeatCount="indefinite"/>
-
+  <circle cx="792" cy="360" r="76" fill="#141414" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="792" cy="360" r="66" fill="none" stroke="#2e2e2e" stroke-width="1"/>
+  <circle cx="792" cy="360" r="7" fill="#ffffff">
+    <animate attributeName="r" values="5;8;5" dur="3s" repeatCount="indefinite"/>
   </circle>
+  <text x="792" y="348" text-anchor="middle" fill="#ffffff" font-size="11" class="meta">MAY_01</text>
 
-  <text
-    x="792"
-    y="348"
-    text-anchor="middle"
-    fill="#ffffff"
-    font-size="11"
-    class="meta">
-
-    MAY_01
-
-  </text>
-
-  <text
-    x="792"
-    y="375"
-    text-anchor="middle"
-    fill="#888888"
-    font-size="9"
-    class="meta">
-
-
-  </text>
-
-
-  <!-- Python -->
   <g transform="translate(390 240)" class="node-group">
     <animateTransform attributeName="transform" type="translate" values="390 240;390 234;390 240" dur="5s" repeatCount="indefinite"/>
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/python/3776AB" x="-17" y="-17" width="34" height="34"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#3776AB" d="M11.898 0C5.337 0 5.753 2.85 5.753 2.85l.006 2.955h6.264v.888H3.327S0 6.268 0 12.871s2.914 6.368 2.914 6.368h1.738v-2.457s-.096-2.915 2.853-2.915h4.947s2.721.032 2.721-2.657V5.591s.385-5.591-5.275-5.591zm-3.2 1.838a1.008 1.008 0 1 1 0 2.016 1.008 1.008 0 0 1 0-2.016z"/>
+      <path fill="#FFD43B" d="M12.102 24c6.561 0 6.145-2.85 6.145-2.85l-.006-2.955h-6.264v-.888h8.695S24 17.732 24 11.129s-2.914-6.368-2.914-6.368h-1.738v2.457s.096 2.915-2.853 2.915h-4.947s-2.721-.032-2.721 2.657v5.626s-.385 5.591 5.275 5.591zm3.2-1.838a1.008 1.008 0 1 1 0-2.016 1.008 1.008 0 0 1 0 2.016z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-40" y="-14" width="80" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">Python</text>
     </g>
   </g>
 
-  <!-- Java -->
   <g transform="translate(525 190)" class="node-group">
     <animateTransform attributeName="transform" type="translate" values="525 190;525 196;525 190" dur="6s" repeatCount="indefinite"/>
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/openjdk/437291" x="-17" y="-17" width="34" height="34"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#E76F00" d="M8.851 18.56s-.917.224-2.177.224c-2.61 0-3.774-1.22-3.774-2.76 0-2.52 2.378-3.321 5.822-3.321h.129v-1.12c0-.986-.418-1.552-1.77-1.552-1.309 0-2.316.398-3.085.834l-.65-1.52C4.38 8.784 5.86 8.21 7.747 8.21c2.61 0 3.79 1.252 3.79 3.19v4.92c0 1.22.128 1.956.32 2.457H9.722c-.16-.367-.257-.89-.289-1.348zm.096-4.323h-.257c-2.122 0-3.743.336-3.743 1.637 0 .802.578 1.282 1.767 1.282.899 0 1.638-.32 2.233-.865V14.237z"/>
+      <path fill="#5382A1" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-35" y="-14" width="70" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">Java</text>
     </g>
   </g>
 
-  <!-- JavaScript -->
   <g transform="translate(1194 240)" class="node-group">
     <animateTransform attributeName="transform" type="translate" values="1194 240;1194 246;1194 240" dur="5.5s" repeatCount="indefinite"/>
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/javascript/F7DF1E" x="-17" y="-17" width="34" height="34"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#F7DF1E" d="M0 0h24v24H0z"/>
+      <path fill="#000000" d="M22 17.712c-.273 1.406-1.28 2.355-3.086 2.355-2.062 0-3.023-1.07-3.023-2.617 0-1.898 1.156-2.586 2.836-3.18 1.055-.383 1.836-.672 1.836-1.375 0-.547-.43-.883-1.07-.883-.797 0-1.219.461-1.445 1.102l-1.633-.961c.469-1.25 1.555-1.898 3.078-1.898 1.836 0 2.938 1.016 2.938 2.508 0 1.656-.992 2.336-2.688 2.93-1.031.36-1.93.688-1.93 1.531 0 .617.477.93 1.188.93.82 0 1.398-.43 1.648-1.016zm-7.688.008c0 1.25-.664 2.344-2.836 2.344-1.398 0-2.453-.617-2.906-1.789l1.648-.961c.281.656.719.992 1.305.992.578 0 .891-.258.891-.883V8.891h1.9v8.83z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-50" y="-14" width="100" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">JavaScript</text>
     </g>
   </g>
 
-  <!-- TypeScript -->
   <g transform="translate(1059 190)" class="node-group">
     <animateTransform attributeName="transform" type="translate" values="1059 190;1059 184;1059 190" dur="6.5s" repeatCount="indefinite"/>
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/typescript/3178C6" x="-17" y="-17" width="34" height="34"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#3178C6" d="M0 0h24v24H0z"/>
+      <path fill="#ffffff" d="M13.88 18.062c-.225 1.153-1.05 1.93-2.53 1.93-1.69 0-2.478-.877-2.478-2.146 0-1.556.947-2.12 2.325-2.607.865-.314 1.505-.551 1.505-1.127 0-.448-.352-.724-.877-.724-.653 0-1 .378-1.184.903l-1.34-.788c.385-1.025 1.276-1.555 2.523-1.555 1.506 0 2.408.833 2.408 2.057 0 1.357-.813 1.914-2.203 2.402-.845.295-1.582.564-1.582 1.255 0 .506.391.763.974.763.672 0 1.147-.353 1.352-.833l1.107.497zm6.62-5.942h-2.523v7.42h-1.558v-7.42h-2.522V10.82h6.603v1.302z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-50" y="-14" width="100" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">TypeScript</text>
     </g>
   </g>
 
-  <!-- React -->
   <g transform="translate(430 390)" class="node-group">
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/react/61DAFB" x="-18" y="-18" width="36" height="36"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <ellipse cx="12" cy="12" rx="4.2" ry="10.2" fill="none" stroke="#61DAFB" stroke-width="1.2" transform="rotate(30 12 12)"/>
+      <ellipse cx="12" cy="12" rx="4.2" ry="10.2" fill="none" stroke="#61DAFB" stroke-width="1.2" transform="rotate(90 12 12)"/>
+      <ellipse cx="12" cy="12" rx="4.2" ry="10.2" fill="none" stroke="#61DAFB" stroke-width="1.2" transform="rotate(150 12 12)"/>
+      <circle cx="12" cy="12" r="2.1" fill="#61DAFB"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-35" y="-14" width="70" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">React</text>
     </g>
   </g>
 
-  <!-- Flutter -->
   <g transform="translate(1154 390)" class="node-group">
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/flutter/02569B" x="-18" y="-18" width="36" height="36"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#02569B" d="M14.314 0L2.3 12 6 15.7 21.686 0h-7.372z"/>
+      <path fill="#02569B" d="M14.257 11.229l-6.857 6.857 3.686 3.686 6.857-6.857-3.686-3.686z"/>
+      <path fill="#02569B" d="M11.086 21.771L14.771 24h7.372l-7.372-7.371-3.685 3.685z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-40" y="-14" width="80" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">Flutter</text>
     </g>
   </g>
 
-  <!-- Node -->
   <g transform="translate(410 585)" class="node-group">
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/nodedotjs/5FA04E" x="-18" y="-18" width="36" height="36"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#5FA04E" d="M12 1L2 6.8v11.5L12 24l10-5.7V6.8L12 1zm0 2.4l7.8 4.5v9l-7.8 4.5-7.8-4.5v-9L12 3.4z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-45" y="-14" width="90" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">Node.js</text>
     </g>
   </g>
 
-  <!-- MySQL -->
   <g transform="translate(1174 585)" class="node-group">
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/mysql/4479A1" x="-18" y="-18" width="36" height="36"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#00758F" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-5h2v5zm0-7h-2V7.5h2v2z"/>
+      <path fill="#F29111" d="M12 4.5c-4.14 0-7.5 3.36-7.5 7.5s3.36 7.5 7.5 7.5 7.5-3.36 7.5-7.5S16.14 4.5 12 4.5zm0 13c-3.03 0-5.5-2.47-5.5-5.5S8.97 6.5 12 6.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-40" y="-14" width="80" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">MySQL</text>
     </g>
   </g>
 
-  <!-- Git -->
   <g transform="translate(575 515)" class="node-group">
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/git/F05032" x="-18" y="-18" width="36" height="36"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#F05032" d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72 1.05 1.83.228 2.652-.82.822-1.93.493-2.652-.228-.522-.523-.662-1.277-.428-1.928l-2.483-2.483v6.753c.245.116.471.282.658.469.722.722 1.05 1.831.228 2.653-.822.821-1.931.492-2.653-.228-.722-.722-.493-1.831.228-2.653.208-.208.458-.383.733-.497V9.756c-.275-.114-.525-.289-.733-.497-.526-.525-.662-1.278-.429-1.928L8.016 4.815 1.155 11.676c-.604.604-.604 1.582 0 2.187l10.48 10.479c.604.604 1.582.604 2.187 0l10.016-10.017c.604-.604.604-1.582 0-2.187z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-30" y="-14" width="60" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">Git</text>
     </g>
   </g>
 
-  <!-- GitHub -->
   <g transform="translate(1009 515)" class="node-group">
     <circle r="34" fill="#141414" stroke="#333333" class="node-bg"/>
-    <image href="https://cdn.simpleicons.org/github/ffffff" x="-18" y="-18" width="36" height="36"/>
+    <g transform="translate(-16, -16) scale(1.33)">
+      <path fill="#ffffff" fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+    </g>
     <g class="tooltip" transform="translate(0, -48)">
       <rect x="-40" y="-14" width="80" height="22" class="tooltip-bg"/>
       <text x="0" y="1" text-anchor="middle" class="tooltip-text">GitHub</text>
     </g>
   </g>
-
-
-  <!-- ====================================================== -->
-  <!-- OUTER DECORATION -->
-  <!-- ====================================================== -->
 
   <g fill="#ffffff">
     <circle cx="300" cy="185" r="2"/>
@@ -398,42 +237,8 @@
     <circle cx="1254" cy="620" r="2"/>
   </g>
 
-
-  <!-- tiny editorial coordinates -->
-
-  <text
-    x="80"
-    y="665"
-    fill="#666666"
-    font-size="9"
-    class="meta">
-
-    01 — DEVELOPMENT
-
-  </text>
-
-
-  <text
-    x="1504"
-    y="665"
-    text-anchor="end"
-    fill="#666666"
-    font-size="9"
-    class="meta">
-
-    2026
-
-  </text>
-
-
-  <!-- bottom line -->
-
-  <line
-    x1="80"
-    y1="685"
-    x2="1504"
-    y2="685"
-    stroke="#222222"
-    stroke-width="1"/>
+  <text x="80" y="665" fill="#666666" font-size="9" class="meta">01 — DEVELOPMENT</text>
+  <text x="1504" y="665" text-anchor="end" fill="#666666" font-size="9" class="meta">2026</text>
+  <line x1="80" y1="685" x2="1504" y2="685" stroke="#222222" stroke-width="1"/>
 
 </svg>
