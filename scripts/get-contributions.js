@@ -4,10 +4,14 @@ const path = require("path");
 
 const username = "prences-may-salve-baldeconza";
 
-const url =
-  `https://github.com/users/${username}/contributions`;
+const url = `https://github.com/users/${username}/contributions`;
 
-https.get(url, (response) => {
+https.get(url, {
+  headers: {
+    "User-Agent": "Mozilla/5.0"
+  }
+}, (response) => {
+
   let html = "";
 
   response.on("data", (chunk) => {
@@ -24,38 +28,76 @@ https.get(url, (response) => {
     }
 
     /*
-     * GitHub's contribution calendar contains elements
-     * with data-date and data-level attributes.
+     * GitHub contribution cells contain:
+     *
+     * data-date="YYYY-MM-DD"
+     * data-level="0-4"
+     *
+     * We specifically look for elements containing
+     * BOTH attributes, rather than assuming they are
+     * on a <td> in a particular order.
      */
 
     const regex =
-      /<td[^>]*data-date="([^"]+)"[^>]*data-level="([^"]+)"[^>]*>/g;
+      /<[^>]*data-date="([^"]+)"[^>]*data-level="([^"]+)"[^>]*>/g;
 
     const contributions = [];
 
     let match;
 
     while ((match = regex.exec(html)) !== null) {
+
       contributions.push({
         date: match[1],
         level: Number(match[2])
       });
+
     }
 
-    if (contributions.length === 0) {
-      console.error(
-        "No contribution data was found."
+    /*
+     * Remove accidental duplicate dates.
+     */
+
+    const unique = new Map();
+
+    for (const contribution of contributions) {
+      unique.set(
+        contribution.date,
+        contribution
       );
+    }
+
+    const cleaned = Array.from(
+      unique.values()
+    ).sort((a, b) =>
+      a.date.localeCompare(b.date)
+    );
+
+    /*
+     * Validate the result.
+     */
+
+    console.log(
+      `Found ${cleaned.length} unique contribution days.`
+    );
+
+    if (cleaned.length < 300) {
+
       console.error(
-        "GitHub may have changed its contribution-page HTML."
+        "WARNING: Fewer than 300 days were found."
       );
+
+      console.error(
+        "The GitHub page structure may have changed."
+      );
+
       return;
     }
 
     const output = {
       username,
       updated: new Date().toISOString(),
-      contributions
+      contributions: cleaned
     };
 
     const outputPath = path.join(
@@ -71,18 +113,23 @@ https.get(url, (response) => {
     );
 
     console.log(
-      `Successfully retrieved ${contributions.length} contribution days.`
+      `Saved ${cleaned.length} days to:`
     );
 
     console.log(
-      `Saved to: ${outputPath}`
+      outputPath
     );
+
   });
 
 }).on("error", (error) => {
+
   console.error(
     "Unable to connect to GitHub:"
   );
 
-  console.error(error.message);
+  console.error(
+    error.message
+  );
+
 });
