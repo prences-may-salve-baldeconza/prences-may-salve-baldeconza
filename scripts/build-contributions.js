@@ -60,12 +60,27 @@ const GRID_WIDTH =
 const GRID_HEIGHT =
   ROWS * STEP - GAP;
 
+
+/*
+ * =========================================================
+ * CONTRIBUTION COLORS
+ *
+ * BLACK BACKGROUND
+ *
+ * Level 0 = gray / no activity
+ * Level 1 = dark red / low
+ * Level 2 = medium red
+ * Level 3 = strong red
+ * Level 4 = brightest red / highest activity
+ * =========================================================
+ */
+
 const LEVELS = [
-  "#2A2A2A", // 0 — no activity
-  "#4A1418", // 1 — low
-  "#7A1F26", // 2 — moderate
-  "#B52A32", // 3 — high
-  "#E53945"  // 4 — very high
+  "#2A2A2A",
+  "#4A1418",
+  "#7A1F26",
+  "#B52A32",
+  "#E53945"
 ];
 
 
@@ -157,8 +172,9 @@ const lastDate =
 /*
  * Move backward to Sunday.
  *
- * GitHub's contribution calendar is organized
- * vertically by weekday and horizontally by week.
+ * GitHub-style layout:
+ * columns = weeks
+ * rows = Sunday → Saturday
  */
 
 const calendarStart =
@@ -198,7 +214,7 @@ let svg = `
         font-size: 20px;
         font-weight: 600;
 
-        fill="#000000";
+        fill: #FFFFFF;
       }
 
       .count {
@@ -210,7 +226,7 @@ let svg = `
 
         font-size: 13px;
 
-        fill: #666666;
+        fill: #A0A0A0;
       }
 
       .month {
@@ -222,7 +238,7 @@ let svg = `
 
         font-size: 11px;
 
-        fill: #666666;
+        fill: #8A8A8A;
       }
 
       .weekday {
@@ -257,7 +273,7 @@ let svg = `
 
         font-size: 10px;
 
-        fill: #777777;
+        fill: #8A8A8A;
       }
 
       .cell {
@@ -271,13 +287,15 @@ let svg = `
 
 
   <!-- =====================================================
-       BACKGROUND
+       BLACK BACKGROUND
   ====================================================== -->
 
   <rect
+    x="0"
+    y="0"
     width="${WIDTH}"
     height="${HEIGHT}"
-    fill="#FFFFFF"
+    fill="#000000"
   />
 
 
@@ -317,8 +335,8 @@ let svg = `
       width="72"
       height="30"
       rx="6"
-      fill="#F3F3F3"
-      stroke="#D8D8D8"
+      fill="#1A1A1A"
+      stroke="#333333"
     />
 
     <text
@@ -326,7 +344,7 @@ let svg = `
       y="19"
       text-anchor="middle"
       class="year"
-      fill="#666666"
+      fill="#888888"
     >
       2025
     </text>
@@ -340,7 +358,7 @@ let svg = `
       width="72"
       height="30"
       rx="6"
-      fill="#111111"
+      fill="#FFFFFF"
     />
 
     <text
@@ -348,7 +366,7 @@ let svg = `
       y="19"
       text-anchor="middle"
       class="year"
-      fill="#FFFFFF"
+      fill="#000000"
     >
       2026
     </text>
@@ -389,9 +407,6 @@ let svg = `
 /*
  * =========================================================
  * MONTH LABELS
- *
- * Only show a month when a new month begins inside
- * a new calendar column.
  * =========================================================
  */
 
@@ -462,8 +477,8 @@ for (
       dateKey(date);
 
     /*
-     * Only render dates that actually belong
-     * to our 365-day dataset.
+     * Check whether this date exists
+     * in the real contribution dataset.
      */
 
     const exists =
@@ -482,8 +497,10 @@ for (
       TOP +
       row * STEP;
 
+
     /*
-     * Dates outside the real dataset remain invisible.
+     * Dates outside the 365-day range
+     * remain invisible.
      */
 
     if (!exists) {
@@ -503,6 +520,13 @@ for (
       continue;
     }
 
+
+    /*
+     * Actual contribution cell.
+     *
+     * 0 = gray
+     * 1–4 = progressively stronger red
+     */
 
     svg += `
       <rect
