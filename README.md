@@ -1,4 +1,5 @@
-<img width="1584" height="396" alt="Profile Banner (6)" src="https://github.com/user-attachments/assets/404b9fb1-f367-4f35-8d62-a91706f95d60" />
+<img width="1584" height="396" alt="BALDECONZA BANNER" src="https://github.com/user-attachments/assets/6fb29744-b13e-463b-8999-0f242be813f5" />
+
 
 
 
