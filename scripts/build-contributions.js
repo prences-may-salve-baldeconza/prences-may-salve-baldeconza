@@ -60,28 +60,12 @@ const GRID_WIDTH =
 const GRID_HEIGHT =
   ROWS * STEP - GAP;
 
-
-/*
- * =========================================================
- * COLORS
- *
- * Level 0 = almost white
- * Level 1 = light gray
- * Level 2 = medium gray
- * Level 3 = dark charcoal
- * Level 4 = restrained red
- *
- * MORE CONTRIBUTIONS = DARKER
- * Level 4 = RED SIGNAL
- * =========================================================
- */
-
 const LEVELS = [
-  "#F0F0F0",
-  "#D2D2D2",
-  "#929292",
-  "#3F3F3F",
-  "#C62828"
+  "#2A2A2A", // 0 — no activity
+  "#4A1418", // 1 — low
+  "#7A1F26", // 2 — moderate
+  "#B52A32", // 3 — high
+  "#E53945"  // 4 — very high
 ];
 
 
@@ -214,7 +198,7 @@ let svg = `
         font-size: 20px;
         font-weight: 600;
 
-        fill: #111111;
+        fill="#000000";
       }
 
       .count {
