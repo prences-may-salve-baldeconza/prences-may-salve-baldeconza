@@ -8,7 +8,7 @@ I'm a Computer Science student specializing in **Artificial Intelligence**, with
 
 I value collaboration and enjoy working with people who share the same passion for **innovation, positivity, and continuous growth**. I believe great technology is built through continuous learning, creativity, and teamwork.
 
-
+<img src="assets/tech-stack.svg" alt="Tech Stack" width="100%">
 
 
 
