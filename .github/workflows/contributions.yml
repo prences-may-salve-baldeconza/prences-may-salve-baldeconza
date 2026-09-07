@@ -1,4 +1,4 @@
-name: Update Contributions
+name: Generate Contributions
 
 on:
   schedule:
@@ -14,22 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Generate contribution graph
-        uses: Man0dya/Readme-Contribution-Graph-Generator@main
+      - name: Generate contribution snake
+        uses: Platane/snk/svg-only@v3
         with:
-          username: prences-may-salve-baldeconza
-          output: assets/contributions.svg
+          github_user_name: prences-may-salve-baldeconza
+          outputs: |
+            dist/contributions.svg
+            dist/contributions-dark.svg?palette=github-dark
 
-      - name: Commit contribution graph
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add assets/contributions.svg
-
-          git diff --cached --quiet || git commit -m "Update contributions"
-
-          git push
+      - name: Publish generated SVG
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          build_dir: dist
+          target_branch: output
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
