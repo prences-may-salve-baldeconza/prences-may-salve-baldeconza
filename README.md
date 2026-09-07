@@ -10,7 +10,7 @@ I value collaboration and enjoy working with people who share the same passion f
 
 <img src="assets/tech-stack.svg" alt="Tech Stack" width="100%">
 
-## Contributions
+### Contributions
 
 <p align="center">
   <img
