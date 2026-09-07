@@ -12,5 +12,11 @@ I value collaboration and enjoy working with people who share the same passion f
 
 ## Contributions
 
-
+<p align="center">
+  <img
+    src="./assets/contributions.svg"
+    width="100%"
+    alt="GitHub Contributions"
+  />
+</p>
 
