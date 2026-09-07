@@ -10,6 +10,13 @@ I value collaboration and enjoy working with people who share the same passion f
 
 <img src="assets/tech-stack.svg" alt="Tech Stack" width="100%">
 
+## Contributions
 
+<p align="center">
+  <img
+    src="https://github-readme-activity-graph.vercel.app/graph?username=prences-may-salve-baldeconza&theme=github-compact"
+    width="100%"
+  />
+</p>
 
 
