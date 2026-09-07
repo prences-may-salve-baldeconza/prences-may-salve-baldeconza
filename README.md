@@ -14,9 +14,8 @@ I value collaboration and enjoy working with people who share the same passion f
 
 <p align="center">
   <img
-    src="./assets/contributions.svg"
+    src="https://github-readme-activity-graph.vercel.app/graph?username=prences-may-salve-baldeconza&theme=github-compact"
     width="100%"
-    alt="GitHub Contributions"
   />
 </p>
 
