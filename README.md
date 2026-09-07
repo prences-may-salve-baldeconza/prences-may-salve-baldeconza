@@ -14,7 +14,7 @@ I value collaboration and enjoy working with people who share the same passion f
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/prences-may-salve-baldeconza/prences-may-salve-baldeconza/output/contributions.svg"
+    src="./profile-3d-contrib/profile-night-rainbow.svg"
     width="100%"
     alt="GitHub Contributions"
   />
